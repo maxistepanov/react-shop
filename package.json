@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "immutable": "^3.8.2",
+    "node-sass-chokidar": "^1.2.2",
+    "npm-run-all": "^4.1.2",
     "qs": "^6.5.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
@@ -18,13 +20,19 @@
     "universal-cookie": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js"
   },
   "devDependencies": {
+    "node-sass": "^4.8.3",
     "redux-devtools": "^3.4.1",
-    "redux-devtools-extension": "^2.13.2"
+    "redux-devtools-extension": "^2.13.2",
+    "sass-loader": "^7.0.0"
   }
 }
