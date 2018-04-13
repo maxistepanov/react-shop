@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import createSagaMiddleware from 'redux-saga';
@@ -10,6 +9,8 @@ import logger from 'redux-logger'
 import {composeWithDevTools} from 'redux-devtools-extension';
 import registerServiceWorker from './registerServiceWorker';
 import rootSaga from './redux/sagas';
+import {BrowserRouter as Router} from 'react-router-dom'
+import App from "./App";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -25,7 +26,10 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <Router>
+      <App/>
+    </Router>
   </Provider>
   , document.getElementById('root'));
+
 registerServiceWorker();
