@@ -3,6 +3,7 @@ import logo from '../logo.svg';
 import '../style/App.css';
 import {connect} from "react-redux";
 import {send} from "../redux/app/action";
+import {selectDataMessage} from "../redux/app/selectors";
 
 class Message extends Component {
 
@@ -18,6 +19,7 @@ class Message extends Component {
   };
 
   render() {
+    const {message} = this.props;
     return (
       <div className="App">
         <header className="App-header">
@@ -29,7 +31,7 @@ class Message extends Component {
         </p>
         <div className="wrapper" style={{margin: 10}}>
           <textarea style={{width: '100%', boxSizing: 'border-box', padding: 15, height: 250}} name="message"
-                    id="message" onChange={this.handleInput}>
+                    id="message" onChange={this.handleInput} defaultValue={message}>
 
         </textarea>
         </div>
@@ -40,7 +42,9 @@ class Message extends Component {
 }
 
 Message = connect(
-  (state) => ({}),
+  (state) => ({
+    message: selectDataMessage(state)
+  }),
   (dispatch) => ({
     sendMessage: (message) => {
       dispatch(send(message))

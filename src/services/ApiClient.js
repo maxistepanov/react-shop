@@ -3,7 +3,7 @@ import qs from 'qs';
 import { env } from '../configs/.env'
 import SessionStorage from './SessionStorage';
 
-export default class ApiClient
+class ApiClient
 {
   configs = {};
   defaultConfigs = {};
@@ -21,7 +21,7 @@ export default class ApiClient
       params: {}
     };
 
-    // this.resetConfigs();
+    this.resetConfigs();
   }
 
   getRuntimeConfigs() {
@@ -107,4 +107,7 @@ export default class ApiClient
 
     return this.post(uri, formData, params, headers, configs);
   }
+
 }
+
+export default new ApiClient();

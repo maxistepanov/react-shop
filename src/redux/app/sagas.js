@@ -1,12 +1,10 @@
 import {all, put, takeLatest, call} from 'redux-saga/effects';
 import {SEND, SEND_FAIL, SEND_SUCCESS} from "./action";
-import ApiClient from "../../services/ApiClient";
-
-const apiClient = new ApiClient();
+import MessageService from "../../services/Message.service";
 
 
 function sendToApi(message) {
-  return apiClient.post('message', message);
+  return MessageService.sendMessage(message);
 }
 
 function* sendMessage(action) {
